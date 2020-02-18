@@ -8,27 +8,27 @@ interface BoardProps {
   onClick: (i: number) => void;
 }
 
-class Board extends React.Component<BoardProps> {
-  renderSquare(i: number) {
+function Board(props: BoardProps) {
+  function renderSquare(i: number) {
     return (
       <Square
         key={i}
-        value={this.props.values[i]}
-        selected={this.props.selectedValues[i]}
-        onClick={() => this.props.onClick(i)}
+        value={props.values[i]}
+        selected={props.selectedValues[i]}
+        onClick={() => props.onClick(i)}
       />
     );
   }
 
-  createBoard() {
+  function createBoard() {
     let board = [];
 
     // Outer loop to create parent
-    for (let i = 0; i < this.props.size; i++) {
+    for (let i = 0; i < props.size; i++) {
       let row = [];
       //Inner loop to create children
-      for (let j = 0; j < this.props.size; j++) {
-        row.push(this.renderSquare(i * this.props.size + j));
+      for (let j = 0; j < props.size; j++) {
+        row.push(renderSquare(i * props.size + j));
       }
       //Create the parent and add the children
       board.push(
@@ -40,9 +40,7 @@ class Board extends React.Component<BoardProps> {
     return board;
   }
 
-  render() {
-    return <div>{this.createBoard()}</div>;
-  }
+  return <div>{createBoard()}</div>;
 }
 
 export default Board;
